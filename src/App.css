@@ -1,38 +1,253 @@
+/* Home page styling */
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  min-height: 100vh;
+  background-color: #282c34;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 15vh;
+  background: #667db6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: whitesmoke;
+}
+
+.instruments {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  color  : white;
+}
+
+.instrument-card {
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  border: 2px solid hsl(118, 79%, 39%);
+  border-radius: 10px;
+  width: 180px;
+  transition: 0.3s;
+}
+
+.instrument-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
+}
+
+.instrument-card:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/*-- Home page styling end --*/
+
+/* Piano Styling Start*/
+
+.piano-container {
+  text-align: center;
+  min-height: 100vh;
+  background-color: #1c1e22;
+}
+
+.piano-header {
+  height: 15vh;
+  background: linear-gradient(to right, #ff9966, #ff5e62);
+  display: flex;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.piano {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.piano-key {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.white-key {
+  width: 40px;
+  height: 200px;
+  background-color: white;
+  border: 1px solid #000;
+  border-radius: 0px 0px 5px 5px;
+  margin: 0 2px;
+}
+
+.black-key {
+  width: 30px;
+  height: 120px;
+  background-color: black;
+  margin: 0 -15px;
+  border-radius: 0px 0px 5px 5px;
+  z-index: 1;
+  color: white;
+}
+
+.white-key span {
+  font-size: 12px;
+  color: #000;
+  margin-bottom: 0;
+}
+
+.navigate-to-home {
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff5e62;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navigate-to-home:hover {
+  background-color: #ff3b4a;
+}
+
+.keyboard-instructions {
+  font-size: 16px;
+  color: #666;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.note-label {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  width: 100%;
+}
+
+.keyboard-key {
+  font-size: 12px;
+  color: #555;
+  margin-top: 5px;
+  font-weight: normal;
+}
+
+.black-key .keyboard-key {
+  color: #ddd;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  font-weight: normal;
+  transform: translateX(-50%);
+}
+
+.piano-key.active {
+  background-color: hsl(198, 5%, 51%);
+}
+
+.black-key.active {
+  background-color: hsl(0, 0%, 27%);
+}
+
+/*-- Piano styling end --*/
+
+/* Rotate Screen For Mobile Devices */
+.rotate-device-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rotate-icon {
+  font-size: 50px;
+  margin: 20px 0;
+  animation: rotate 2s infinite;
+  display: inline-block;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(90deg); }
+  50% { transform: rotate(90deg); }
+  75% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.rotate-message {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  .rotate-device-message {
+    display: flex;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .piano-container > *:not(.rotate-device-message) {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .piano {
+    justify-content: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 10px;
+  }
+  
+  .white-key {
+    width: 35px;
+    height: 140px;
+  }
+  
+  .black-key {
+    width: 25px;
+    height: 85px;
+    margin: 0 -12.5px;
+  }
+  
+  .note-label {
+    font-size: 10px;
+  }
+  
+  .keyboard-key {
+    font-size: 9px;
+  }
+  
+  .piano-header {
+    height: 10vh;
+  }
+  
+  .keyboard-instructions {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
   }
 }
